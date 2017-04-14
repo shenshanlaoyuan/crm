@@ -18,35 +18,30 @@
 		http://code.alibabatech.com/schema/dubbo        
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-	<!-- 配置 读取properties文件 jdbc.properties -->
-	<context:property-placeholder location="classpath:jdbc.properties" />
-
-	<!-- 配置 数据源 -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-		<!-- 驱动 -->
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:db.properties" />
+	<!-- 数据库连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driver}" />
-		<!-- url -->
 		<property name="url" value="${jdbc.url}" />
-		<!-- 用户名 -->
 		<property name="username" value="${jdbc.username}" />
-		<!-- 密码 -->
 		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="10" />
+		<property name="maxIdle" value="5" />
 	</bean>
-
-	<!-- 配置 Mybatis的工厂 -->
-	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
-		<!-- 数据源 -->
+	
+	<!-- mapper配置 -->
+	<!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据库连接池 -->
 		<property name="dataSource" ref="dataSource" />
-		<!-- 配置Mybatis的核心 配置文件所在位置 -->
+		<!-- 加载mybatis的全局配置文件 -->
 		<property name="configLocation" value="classpath:SqlMapConfig.xml" />
-		<!-- 配置pojo别名 -->
-		<property name="typeAliasesPackage" value="cn.itcast.core.bean"></property>
 	</bean>
-
-	<!-- 配置 1：原始Dao开发 接口实现类 Mapper.xml 三个 2：接口开发 接口 不写实现类 Mapper.xml 二个 （UserDao、ProductDao 
-		、BrandDao。。。。。。。） 3：接口开发、并支持扫描 cn.itcast.core.dao(UserDao。。。。。） 写在此包下即可被扫描到 -->
+	
+	<!-- 配置Mapper扫描器 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.shenshanlaoyuan.dao" />
+		<property name="basePackage" value="com.shenshanlaoyuan.dao"/>
 	</bean>
-
 </beans>

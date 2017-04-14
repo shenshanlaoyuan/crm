@@ -20,9 +20,8 @@
 		http://code.alibabatech.com/schema/dubbo        
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 		
-		
-		<!-- 配置  扫描   @Service -->
-		<context:component-scan base-package="com.shenshanlaoyuan.service"/>
+		<!-- @Service扫描 -->
+	<context:component-scan base-package="com.shenshanlaoyuan.service"></context:component-scan>
 		
 		
 		
