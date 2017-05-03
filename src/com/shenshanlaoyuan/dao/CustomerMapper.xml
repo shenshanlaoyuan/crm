@@ -2,4 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.shenshanlaoyuan.dao.CustomerMapper" >
 
+<sql id="customer_where">
+	<where>
+		<if test="custName != null and custName != ''">
+			and a.cust_name like '%${custName}%'
+		</if>
+		<if test="custSource != null and custSource != ''">
+			and a.cust_source= #{custSource}
+		</if>
+		<if test="custIndustry != null and custIndustry != ''">
+			and a.cust_industry= #{custIndustry}
+		</if>
+		<if test="custLevel != null and custLevel != ''">
+			and a.cust_level= #{custLevel}
+		</if>
+	</where>
+</sql>
+
+<select id="findCustomerByVo"  parameterType="com.shenshanlaoyuan.pojo.QueryVo" resultType="com.shenshanlaoyuan.pojo.Customer">
+	select 
+	a.cust_id , a.cust_name ,b.dict_item_name cust_source, 
+	c.dict_item_name cust_industry,d.dict_item_name cust_level,
+	a.cust_phone,a.cust_mobile,a.cust_linkman,a.cust_zipcode,a.cust_address,a.cust_createtime
+	from crm.customer a
+	left join crm.base_dict b on a.cust_source = b.dict_id
+	left join crm.base_dict c on a.cust_industry = c.dict_id
+	left join crm.base_dict d on a.cust_level = d.dict_id
+	
+	<include refid="customer_where"></include>
+	limit #{start},#{size}
+</select>
+
+<select id="findCustomerByVoCount"  parameterType="com.shenshanlaoyuan.pojo.QueryVo" resultType="int">
+	select 
+	count(*)
+	from crm.customer a
+	left join crm.base_dict b on a.cust_source = b.dict_id
+	left join crm.base_dict c on a.cust_industry = c.dict_id
+	left join crm.base_dict d on a.cust_level = d.dict_id
+	
+	<include refid="customer_where"></include>
+</select>
 </mapper>
