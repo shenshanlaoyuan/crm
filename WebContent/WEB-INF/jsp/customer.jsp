@@ -409,7 +409,7 @@
 		function editCustomer(id) {
 			$.ajax({
 				type:"get",
-				url:"<%=basePath%>customer/edit.action",
+				url:"<%=basePath%>customer/detail.action",
 				data:{"id":id},
 				success:function(data) {
 					$("#edit_cust_id").val(data.cust_id);

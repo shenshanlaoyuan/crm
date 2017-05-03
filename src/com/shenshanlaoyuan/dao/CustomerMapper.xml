@@ -43,4 +43,47 @@
 	
 	<include refid="customer_where"></include>
 </select>
+
+<select id="findCustomerById" parameterType="long" resultType="com.shenshanlaoyuan.pojo.Customer">
+	select * from crm.customer where cust_id = #{id}
+</select>
+
+<update id="updateCustomerById" parameterType="com.shenshanlaoyuan.pojo.Customer">
+		update crm.customer 
+		<set>
+			<if test="cust_name != null and  cust_name != ''">
+				cust_name=#{cust_name} ,
+			</if>
+			<if test="cust_source != null and cust_source  != ''">
+				cust_source=#{cust_source},
+			</if>
+			<if test="cust_industry != null and  cust_industry != ''">
+				cust_industry=#{cust_industry},
+			</if>
+			<if test="cust_level != null and  cust_level != ''">
+				cust_level=#{cust_level},
+			</if>
+			<if test="cust_linkman != null and  cust_linkman != ''">
+				cust_linkman=#{cust_linkman},
+			</if>
+			<if test=" cust_phone != null and  cust_phone != ''">
+				cust_phone=#{cust_phone},
+			</if>
+			<if test="cust_mobile != null and cust_mobile  != ''">
+				cust_mobile=#{cust_mobile},
+			</if>
+			<if test="cust_zipcode != null and  cust_zipcode != ''">
+				cust_zipcode=#{cust_zipcode},
+			</if>
+			<if test="cust_address != null and   cust_address!= ''">
+				cust_address=#{cust_address},
+			</if>
+		</set>
+		where cust_id=#{cust_id}
+	</update>
+	
+	<delete id="delCustomerById" parameterType="long">
+		delete from crm.customer where cust_id=#{id}
+	</delete>
+
 </mapper>

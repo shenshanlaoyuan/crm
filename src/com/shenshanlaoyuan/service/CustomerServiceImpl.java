@@ -37,4 +37,21 @@ public class CustomerServiceImpl implements CustomerService {
 		return count;
 	}
 
+	@Override
+	public Customer findCustomerById(Long id) {
+		Customer customer = customerMapper.findCustomerById(id);
+		return customer;
+	}
+
+	@Override
+	public void updateCustomerById(Customer customer) {
+		customerMapper.updateCustomerById(customer);
+	}
+
+	@Override
+	public void delCustomerById(Long id) {
+
+		customerMapper.delCustomerById(id);
+	}
+
 }
