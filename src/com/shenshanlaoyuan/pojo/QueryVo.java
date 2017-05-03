@@ -2,10 +2,10 @@ package com.shenshanlaoyuan.pojo;
 
 public class QueryVo {
 
-	private String custName;
-	private String custSource;
-	private String custIndustry;
-	private String custLevel;
+	private String custName;//客户姓名
+	private String custSource;//客户来源
+	private String custIndustry;//客户行业
+	private String custLevel;//客户级别
 	private Integer page = 1;
 	private Integer start;
 	private Integer size = 10;
