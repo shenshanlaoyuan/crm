@@ -7,9 +7,7 @@ import java.util.Date;
 import org.springframework.core.convert.converter.Converter;
 
 /**
- * S - source:源
- * T - target:目标
- * @author zj
+ * 自定义转换器 
  *
  */
 public class CustomGlobalStrToDateConverter implements Converter<String, Date> {

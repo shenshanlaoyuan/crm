@@ -33,6 +33,13 @@ public class CustomerController {
 	@Value("${customer.dict.level}")
 	private String level;
 	
+	/**
+	 * 查询展示customer列表
+	 * @param vo
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/list")
 	public String list(QueryVo vo,Model model) throws Exception{
 		//客户来源
@@ -86,7 +93,12 @@ public class CustomerController {
 		return "customer";
 	}
 	
-	
+	/**
+	 * 修改页面数据回显
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/detail")
 	@ResponseBody
 	public Customer detail(Long id) throws Exception{
@@ -94,6 +106,12 @@ public class CustomerController {
 		return customer;
 	}
 	
+	/**
+	 * 修改customer
+	 * @param customer
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/update")
 	public String update(Customer customer) throws Exception{
 		
@@ -101,7 +119,12 @@ public class CustomerController {
 		
 		return "customer";
 	}
-	
+	/**
+	 * 删除customer
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/delete")
 	public String update(Long id) throws Exception{
 		
