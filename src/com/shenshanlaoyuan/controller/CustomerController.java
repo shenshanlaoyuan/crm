@@ -126,7 +126,7 @@ public class CustomerController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/delete")
-	public String update(Long id) throws Exception{
+	public String delete(Long id) throws Exception{
 		
 		customerService.delCustomerById(id);
 		
